@@ -46,6 +46,39 @@ void visit(BiTNode *node) {
     printf("-->%d\t", node->data);
 }
 
+//先序遍历递归版本
+void preOrderTraverse(BiTree Tree) {
+    if (Tree) {
+        visit(Tree);
+        preOrderTraverse(Tree->lchild);
+        preOrderTraverse(Tree->rchild);
+    }
+}
+
+//先序遍历非递归版本
+void preOrderTraverseNonrecursion(BiTree Tree) {
+    if (Tree) {
+        BiTNode *stack[100];
+        int top = -1;
+        BiTNode *p = Tree;
+        stack[++top] = p;//根结点入栈
+        while (top != -1) {
+            p = stack[top--];//出栈访问
+            visit(p);
+
+            //先右后左 因为后入栈的先出栈 而先序遍历 通常先访问左孩子
+            if (p->rchild) {
+                stack[++top] = p->rchild;
+            }
+
+            if (p->lchild) {
+                stack[++top] = p->lchild;
+            }
+
+        }
+    }
+}
+
 //中序遍历递归版本
 void inOrderTraverse(BiTree Tree) {
     if (Tree) {
@@ -76,8 +109,18 @@ int main() {
     BiTree tree;
     initTree(&tree);
 
+    preOrderTraverse(tree);
+    printf("\n-----先序递归/非递归------\n");
+    preOrderTraverseNonrecursion(tree);
+
+    printf("\n");
+    printf("\n-------------------------------------------\n");
+    printf("\n");
+
     inOrderTraverse(tree);
     printf("\n-----中序递归/非递归------\n");
     inOrderTraverseNonrecursion(tree);
+
+
     return 0;
 }

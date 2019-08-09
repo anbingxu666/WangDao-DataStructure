@@ -1,6 +1,6 @@
 # WangDao-DataStructure
 
-![Progress](http://progressed.io/bar/58?title=completed)  
+![Progress](http://progressed.io/bar/18?title=completed)  
 
 > 2020个人考研总结，王道考研数据结构书籍部分代码及算法题实现
 >
@@ -71,6 +71,9 @@
 ## 排序算法
 
 ### 快速排序
+
+- 递归版本已经完成
+- 非递归版本待更新
 
 ### 堆排序
 
