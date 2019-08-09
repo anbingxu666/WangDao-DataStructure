@@ -114,7 +114,7 @@ void postOrderTraverse(BiTree Tree) {
     }
 }
 
-//后序遍历的递归算法
+//后序遍历的非递归算法
 void postOrderTraverseNonrecursion(BiTree Tree) {
     BiTNode *stack1[100];
     BiTNode *stack2[100];//后序遍历的非递归算法 通常需要双栈 ，但是也有单栈的算法.
@@ -138,6 +138,27 @@ void postOrderTraverseNonrecursion(BiTree Tree) {
     while (top2 != -1) {
         p = stack2[--top2];
         visit(p);
+    }
+}
+
+//层序遍历算法 借助c++ stl的queue实现
+void LevelOrderTraverse(BiTree Tree) {
+    queue<BiTNode *> myQueue;
+    if (Tree) {
+        myQueue.push(Tree);//根结点入队列
+    }
+    while (!myQueue.empty()) {
+        BiTNode *pNode = myQueue.front();//取得队首
+        myQueue.pop();//删除队列首个元素
+        visit(pNode);
+        if (pNode->rchild) {//左孩子入队列
+            myQueue.push(pNode->lchild);
+
+        }
+        if (pNode->lchild) {//右孩子入队列
+            myQueue.push(pNode->rchild);
+
+        }
     }
 }
 
@@ -166,6 +187,12 @@ int main() {
     printf("\n-----后序递归/非递归------\n");
     postOrderTraverseNonrecursion(tree);
 
+    printf("\n");
+    printf("\n-------------------------------------------\n");
+    printf("\n");
+
+    printf("层序遍历\n");
+    LevelOrderTraverse(tree);
 
     return 0;
 }
