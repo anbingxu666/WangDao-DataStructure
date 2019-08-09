@@ -4,9 +4,11 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <queue>
 
 #define ElemType int
 
+using namespace std;
 //定义树的链式存储结构
 typedef struct BiTNode {
     struct BiTNode *lchild;
@@ -57,6 +59,9 @@ void preOrderTraverse(BiTree Tree) {
 
 //先序遍历非递归版本
 void preOrderTraverseNonrecursion(BiTree Tree) {
+    if(Tree == nullptr){
+        return;
+    }
     if (Tree) {
         BiTNode *stack[100];
         int top = -1;
@@ -66,7 +71,7 @@ void preOrderTraverseNonrecursion(BiTree Tree) {
             p = stack[top--];//出栈访问
             visit(p);
 
-            //先右后左 因为后入栈的先出栈 而先序遍历 通常先访问左孩子
+            //!!!先右后左 因为后入栈的先出栈 而先序遍历 通常先访问左孩子
             if (p->rchild) {
                 stack[++top] = p->rchild;
             }
@@ -90,17 +95,20 @@ void inOrderTraverse(BiTree Tree) {
 
 //中序遍历非递归版本
 void inOrderTraverseNonrecursion(BiTree Tree) {
+    if(Tree == nullptr){
+        return;
+    }
     BiTNode *stack[100];//初始化一个数组栈
     int top = -1;//栈顶指针指向-1
     BiTNode *p = Tree;//辅助指针p 指向当前要操作的结点 初始为root
     while (p != nullptr || top != -1) {
         if (p) {
-            stack[++top] = p;
-            p = p->lchild;
+            stack[++top] = p;//入栈
+            p = p->lchild;//指向其左孩子
         } else {
             p = stack[top--];//出栈
             visit(p);//访问
-            p = p->rchild;
+            p = p->rchild;//指向其右孩子
         }
     }
 }
@@ -114,8 +122,11 @@ void postOrderTraverse(BiTree Tree) {
     }
 }
 
-//后序遍历的非递归算法
+//后序遍历的递归算法
 void postOrderTraverseNonrecursion(BiTree Tree) {
+    if(Tree == nullptr){
+        return;
+    }
     BiTNode *stack1[100];
     BiTNode *stack2[100];//后序遍历的非递归算法 通常需要双栈 ，但是也有单栈的算法.
     //栈一用来辅助遍历，栈二存放遍历的顺序。
