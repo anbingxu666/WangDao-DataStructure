@@ -105,6 +105,42 @@ void inOrderTraverseNonrecursion(BiTree Tree) {
     }
 }
 
+//后序遍历递归算法
+void postOrderTraverse(BiTree Tree) {
+    if (Tree) {
+        postOrderTraverse(Tree->lchild);
+        postOrderTraverse(Tree->rchild);
+        visit(Tree);
+    }
+}
+
+//后序遍历的递归算法
+void postOrderTraverseNonrecursion(BiTree Tree) {
+    BiTNode *stack1[100];
+    BiTNode *stack2[100];//后序遍历的非递归算法 通常需要双栈 ，但是也有单栈的算法.
+    //栈一用来辅助遍历，栈二存放遍历的顺序。
+    int top1 = -1, top2 = -1;
+    BiTNode *p = Tree;
+    stack1[++top1] = p;//先将根结点入栈1
+    while (top1 != -1) {
+        p = stack1[top1--];//出栈1
+        stack2[top2++] = p;//进入栈2 ，栈二是为了保存每遍历顺序的逆序的栈
+
+        //先左后右的目的是 右先弹出栈1 然后先进栈2 后出栈2 所以是左 右 根的顺序
+        if (p->lchild) {//先入左
+            stack1[++top1] = p->lchild;
+        }
+        if (p->rchild) {//后入右
+            stack1[++top1] = p->rchild;
+        }
+    }
+    //遍历栈二 即访问顺序
+    while (top2 != -1) {
+        p = stack2[--top2];
+        visit(p);
+    }
+}
+
 int main() {
     BiTree tree;
     initTree(&tree);
@@ -120,6 +156,15 @@ int main() {
     inOrderTraverse(tree);
     printf("\n-----中序递归/非递归------\n");
     inOrderTraverseNonrecursion(tree);
+
+
+    printf("\n");
+    printf("\n-------------------------------------------\n");
+    printf("\n");
+
+    postOrderTraverse(tree);
+    printf("\n-----后序递归/非递归------\n");
+    postOrderTraverseNonrecursion(tree);
 
 
     return 0;
