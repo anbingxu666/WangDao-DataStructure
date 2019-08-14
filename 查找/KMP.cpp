@@ -25,7 +25,7 @@ void get_next(string s, int next[]) {
 int Index_KMP(string s, string t, int next[], int pos) {
     int i = pos, j = 1;
     while (i <= s.length() && j <= t.length()) {
-        if (j == 0 || s[i] == t[j]) {
+        if (j == 0 || s[i] == t[j]) {//j == 0 是kmp算法设计的巧妙之处
             ++i;
             ++j;
         } else {
@@ -35,7 +35,7 @@ int Index_KMP(string s, string t, int next[], int pos) {
 
     }
     if (j > t.length()) {
-        return i - t.length();
+        return i - t.length();//返回位主串的起点下标
     } else {
         return 0;
     }
