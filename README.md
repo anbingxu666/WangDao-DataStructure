@@ -1,6 +1,6 @@
 # WangDao-DataStructure
 
-![Progress](http://progressed.io/bar/18?title=completed)  
+![Progress](http://progressed.io/bar/20?title=completed)  
 
 > 2020个人考研总结，王道考研数据结构书籍部分代码及算法题实现
 >
@@ -80,3 +80,15 @@
 - 堆排序
 
 ### 归并排序
+
+
+
+
+
+## 计划
+
+- 2019-8-14 堆排序 + 归并排序
+- 2019-8-15 Dijkstra
+- 2019-8-18 Floyd
+- 2019-8-21 Prim + Kruskal
+- 2019-8-24 拓扑排序
