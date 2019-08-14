@@ -162,11 +162,11 @@ void LevelOrderTraverse(BiTree Tree) {
         BiTNode *pNode = myQueue.front();//取得队首
         myQueue.pop();//删除队列首个元素
         visit(pNode);
-        if (pNode->rchild) {//左孩子入队列
+        if (pNode->lchild) {//左孩子入队列
             myQueue.push(pNode->lchild);
 
         }
-        if (pNode->lchild) {//右孩子入队列
+        if (pNode->rchild) {//右孩子入队列
             myQueue.push(pNode->rchild);
 
         }
